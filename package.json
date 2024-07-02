@@ -1,0 +1,17 @@
+{
+  "name": "github-pages-router",
+  "version": "1.0.0",
+  "private": true,
+  "license": "MIT",
+  "description": "client side router for GitHub Pages, with transition API",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": {
+    "name": "Gianluca Casati",
+    "url": "http://fibo.github.io"
+  }
+}
