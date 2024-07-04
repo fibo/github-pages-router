@@ -17,7 +17,7 @@ createServer(async (req, res) => {
   const STATIC_PATH = dirname(fileURLToPath(import.meta.url));
   const pathParts = [STATIC_PATH, req.url];
 
-  if (req.url.endsWith("/")) pathParts.push("404.html");
+  if (req.url.endsWith("/")) pathParts.push("index.html");
 
   const filePath = join(...pathParts);
 
