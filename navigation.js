@@ -1,7 +1,13 @@
 const anchorSelector = "nav a";
+const anchorWithHrefSelector = (href) => `${anchorSelector}[href=".${href}"]`;
 const selectedClass = "selected";
 const contentMap = new Map();
 const contentElement = document.querySelector("main");
+
+const defaultRouteHref = "/articles/overview.html";
+const routes = new Map()
+  .set(defaultRouteHref, "/overview")
+  .set("/articles/setup.html", "/setup");
 
 async function updateContent(url) {
   try {
@@ -30,16 +36,35 @@ function updateDOM(anchor) {
   updateContent(anchor.href);
 }
 
+function updateHistory(anchor) {
+  const url = new URL(anchor.href);
+  history.pushState({}, "", routes.get(url.pathname));
+}
+
+function navigate(anchor) {
+  if (anchor.classList.contains(selectedClass)) return;
+  updateHistory(anchor);
+  if (!document.startViewTransition) return updateDOM(anchor);
+  document.startViewTransition(() => {
+    updateDOM(anchor);
+  });
+}
+
 addEventListener("load", () => {
   for (const anchor of document.querySelectorAll(anchorSelector))
     anchor.addEventListener("click", (event) => {
       event.preventDefault();
-      if (event.target.classList.contains(selectedClass)) return;
-      if (!document.startViewTransition) return updateDOM(anchor);
-      document.startViewTransition(() => {
-        updateDOM(anchor);
-      });
+      navigate(event.target);
     });
 
-  document.querySelector(anchorSelector).click();
+  const { pathname } = location;
+
+  for (const [href, route] of routes) {
+    if (pathname == route) {
+      const anchor = document.querySelector(anchorWithHrefSelector(href));
+      navigate(anchor);
+      return;
+    }
+  }
+  navigate(document.querySelector(anchorWithHrefSelector(defaultRouteHref)));
 });
