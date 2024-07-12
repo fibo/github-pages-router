@@ -42,7 +42,6 @@ createServer(async (req, res) => {
     mimeType = "html";
   }
 
-  console.log("filePath", filePath);
   const stream = createReadStream(filePath);
 
   res.writeHead(200, { "Content-Type": mimeType });

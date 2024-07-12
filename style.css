@@ -1,10 +1,13 @@
-@layer reset, layout, theme;
+@layer reset, layout, theme, typography;
 
 @layer reset {
-  body {
+  *,
+  *::before,
+  *::after {
     box-sizing: border-box;
+  }
+  * {
     margin: 0;
-    padding: 0;
   }
 }
 
@@ -70,6 +73,40 @@
 
   footer {
     grid-area: footer;
+  }
+}
+
+@layer typography {
+  :root {
+    --font-serif: "Averia Serif Libre", serif;
+    --font-sans-serif: "Optima", sans-serif;
+  }
+
+  body {
+    font-family: var(--font-sans-serif);
+    font-optical-sizing: auto;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  input,
+  button,
+  textarea,
+  select {
+    font: inherit;
+  }
+
+  :any-link,
+  h1,
+  h2 {
+    font-family: var(--font-serif);
+  }
+
+  h1 {
+    font-size: 2.25em;
+  }
+  h1 {
+    font-size: 2em;
   }
 }
 
