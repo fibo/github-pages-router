@@ -23,7 +23,7 @@ createServer(async (req, res) => {
 
   const exists = await access(filePath).then(
     () => true,
-    () => false
+    () => false,
   );
 
   const sendText = (statusCode, text) => {
@@ -38,11 +38,11 @@ createServer(async (req, res) => {
 
   if (!exists) {
     if (mimeType) return sendText(404, "Not found");
-    filePath = join(STATIC_PATH, "404.html")
-    mimeType = "html"
+    filePath = join(STATIC_PATH, "404.html");
+    mimeType = "html";
   }
 
-  console.log('filePath', filePath)
+  console.log("filePath", filePath);
   const stream = createReadStream(filePath);
 
   res.writeHead(200, { "Content-Type": mimeType });
