@@ -6,12 +6,20 @@
   "description": "client side router for GitHub Pages, with transition API",
   "type": "module",
   "scripts": {
+    "prettier": "prettier --write .",
+    "prettier--check": "prettier --check .",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
-  "keywords": [],
   "author": {
     "name": "Gianluca Casati",
     "url": "http://fibo.github.io"
-  }
+  },
+  "devDependencies": {
+    "pre-commit": "^1.2.2",
+    "prettier": "^3.3.2"
+  },
+  "pre-commit": [
+    "prettier--check"
+  ]
 }

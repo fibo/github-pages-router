@@ -4,7 +4,7 @@
 
 ## Articles
 
-The *articles/* folder contains a set of HTML snippets that are loaded into the page.
+The _articles/_ folder contains a set of HTML snippets that are loaded into the page.
 
 ## Development
 

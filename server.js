@@ -19,7 +19,7 @@ createServer(async (req, res) => {
 
   if (req.url.endsWith("/")) pathParts.push("index.html");
 
-  const filePath = join(...pathParts);
+  let filePath = join(...pathParts);
 
   const exists = await access(filePath).then(
     () => true,
@@ -31,13 +31,19 @@ createServer(async (req, res) => {
     res.end(text);
   };
 
-  if (!exists) return sendText(404, "Not found");
-
-  const stream = createReadStream(filePath);
   const fileExtension = extname(filePath).substring(1).toLowerCase();
-  const mimeType = fileExtensionToMimeTypeMap.get(fileExtension);
+  let mimeType = fileExtensionToMimeTypeMap.get(fileExtension);
 
-  if (!mimeType) return sendText(501, "Not implemented");
+  if (fileExtension && !mimeType) return sendText(501, "Not implemented");
+
+  if (!exists) {
+    if (mimeType) return sendText(404, "Not found");
+    filePath = join(STATIC_PATH, "404.html")
+    mimeType = "html"
+  }
+
+  console.log('filePath', filePath)
+  const stream = createReadStream(filePath);
 
   res.writeHead(200, { "Content-Type": mimeType });
   stream.pipe(res);

@@ -19,7 +19,7 @@
     :root {
       --background-color: #40464a;
       --text-color: #d0cfc7;
-    --accent-color: #3788d6;
+      --accent-color: #3788d6;
     }
   }
 
@@ -30,23 +30,23 @@
 }
 
 @layer layout {
-  html, body {
+  html,
+  body {
     width: 100%;
     height: 100%;
-}
+  }
 
-    .layout {
-      min-height: 100%;
-      padding: 0.5em;
-      display: grid;
-      grid-template-areas: "header" "navigation" "content" "footer";
-      grid-template-rows: auto 1fr auto auto;
-      grid-template-columns: 100%;
-      gap: 0.5em;
-    }
+  .layout {
+    min-height: 100%;
+    padding: 0.5em;
+    display: grid;
+    grid-template-areas: "header" "navigation" "content" "footer";
+    grid-template-rows: auto 1fr auto auto;
+    grid-template-columns: 100%;
+    gap: 0.5em;
+  }
 
   @media (min-width: 800px) {
-
     .layout {
       grid-template-columns: 1fr 3fr;
       grid-template-areas:
