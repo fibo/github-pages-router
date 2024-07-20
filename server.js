@@ -47,7 +47,7 @@ createServer(async (req, res) => {
   res.writeHead(200, { "Content-Type": mimeType });
   stream.pipe(res);
 }).listen(PORT, () => {
-  const localAddress = `http://localhost:${PORT}`;
+  const localAddress = `http://localhost:${PORT}/`;
   console.info(`Server started on ${localAddress}`);
   const platform = os.platform();
   if (platform === "darwin") exec(`open ${localAddress}`);
