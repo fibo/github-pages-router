@@ -1,6 +1,6 @@
 const anchorSelector = "nav a";
 const anchorWithHrefSelector = (href) => `${anchorSelector}[href=".${href}"]`;
-const selectedClass = "selected";
+// TODO const selectedClass = "selected";
 const contentMap = new Map();
 const contentElement = document.querySelector("main");
 
@@ -8,6 +8,12 @@ const defaultRouteHref = "/articles/overview.html";
 const routes = new Map()
   .set(defaultRouteHref, "/overview")
   .set("/articles/setup.html", "/setup");
+
+function contentUrlFromLocation(url) {
+  if (url.endsWith("setup")) return "/articles/setup.html";
+  if (url.endsWith("overview")) return "/articles/overview.html";
+  return "/articles/not-found.html";
+}
 
 async function updateContent(url) {
   try {
@@ -24,29 +30,24 @@ async function updateContent(url) {
   }
 }
 
-function updateNavigation(anchor) {
-  document
-    .querySelector(`${anchorSelector}.${selectedClass}`)
-    ?.classList.remove(selectedClass);
-  anchor.classList.add(selectedClass);
+// TODO
+// function updateNavigation(anchor) {
+//   document
+//     .querySelector(`${anchorSelector}.${selectedClass}`)
+//     ?.classList.remove(selectedClass);
+//   anchor.classList.add(selectedClass);
+// }
+
+function pushHistory(href) {
+  history.pushState({}, "", href);
 }
 
-function updateDOM(anchor) {
-  updateNavigation(anchor);
-  updateContent(anchor.href);
-}
-
-function updateHistory(anchor) {
-  const url = new URL(anchor.href);
-  history.pushState({}, "", routes.get(url.pathname));
-}
-
-function navigate(anchor) {
-  if (anchor.classList.contains(selectedClass)) return;
-  updateHistory(anchor);
-  if (!document.startViewTransition) return updateDOM(anchor);
+function viewTransition(href) {
+  // TODO try location = new URL(document.baseURI, href)
+  const contentUrl = contentUrlFromLocation(href);
+  if (!document.startViewTransition) return updateContent(contentUrl);
   document.startViewTransition(() => {
-    updateDOM(anchor);
+    updateContent(contentUrl);
   });
 }
 
@@ -54,17 +55,15 @@ addEventListener("load", () => {
   for (const anchor of document.querySelectorAll(anchorSelector))
     anchor.addEventListener("click", (event) => {
       event.preventDefault();
-      navigate(event.target);
+      const href = event.target.href;
+      // TODO if (anchor.classList.contains(selectedClass)) return;
+      pushHistory(href);
+      viewTransition(href);
     });
 
-  const { pathname } = location;
+  viewTransition(location.toString());
+});
 
-  for (const [href, route] of routes) {
-    if (pathname == route) {
-      const anchor = document.querySelector(anchorWithHrefSelector(href));
-      navigate(anchor);
-      return;
-    }
-  }
-  navigate(document.querySelector(anchorWithHrefSelector(defaultRouteHref)));
+addEventListener("popstate", () => {
+  viewTransition(location.toString());
 });
