@@ -8,7 +8,7 @@
   </p>
 
   <p>
-    You can start simply by coping the <code>index.html</code> into the
+    You can start simply by coping your <code>index.html</code> into a
     <code>404.html</code> file.
   </p>
 
@@ -19,32 +19,38 @@
   </p>
 
   <p>
-    One is a website that will have an homepage like
-    <code>https://YOUR-DOMAIN/YOUR-REPO-NAME</code> where
+    The first kind happens when your repository has a name like
+    <code>YOUR-ACCOUNT-OR-ORGANIZATION.github.io</code>. In this case the
+    homepage will be <code>https://YOUR-DOMAIN/</code> where
     <code>YOUR-DOMAIN</code> will default to
     <code>YOUR-ACCOUNT-OR-ORGANIZATION.github.io</code>. You can also set your
-    custom domain, check out the
+    <strong>custom domain</strong>, check out the
     <a href="https://pages.github.com/">official GitHub Pages documentation</a>.
   </p>
 
   <p>
-    The second one happens when the repository name is
-    <code>YOUR-ACCOUNT-OR-ORGANIZATION.github.io</code> and in this case the
-    homepage will be <code>https://YOUR-DOMAIN</code>.
+    The second kind is a website that will have an homepage like
+    <code>https://YOUR-DOMAIN/YOUR-REPO-NAME/</code>. In this case it is
+    required that you add a <code>base</code> tag in your HTML
+    <code>head</code>, something like the following:
   </p>
+
+  <pre><code>&lt;base href="/YOUR-REPO-NAME/" /&gt;</code></pre>
 
   <p>
     To simulate this behaviour locally, the
     <a
       href="https://github.com/fibo/github-pages-router/blob/main/server.js"
       target="_blank"
-      >development server</a
     >
+      development server
+    </a>
     reads the <code>homepage</code> attribute in the
     <a
       href="https://github.com/fibo/github-pages-router/blob/main/package.json"
       target="_blank"
-      >package.json</a
     >
+      package.json
+    </a>
   </p>
 </article>

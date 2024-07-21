@@ -135,6 +135,11 @@
     font-size: 1.75em;
   }
 
+  :any-link {
+    font-size: 1.2rem;
+    letter-spacing: -1px;
+  }
+
   .contents-title {
     font-size: 1.2em;
     line-height: 2.2;
