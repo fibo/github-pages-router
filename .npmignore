@@ -1,0 +1,6 @@
+.prettierignore
+articles/
+src/
+index.html
+404.html
+style.css
