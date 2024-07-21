@@ -2,13 +2,49 @@
   <h2>Router setup</h2>
   <p>
     The main trick to enable client side routing is to configure the server side
-    router to serve content when the request get a 404. On GitHub pages, you can
-    do it with a 404.html file.
+    router to serve content when the request get a 404 HTTP status code. On
+    <em>GitHub Pages</em>, you can achieve it creating a
+    <code>404.html</code> file.
   </p>
 
-  <p>You can start simply by coping the index.html into the 404.html file.</p>
+  <p>
+    You can start simply by coping the <code>index.html</code> into the
+    <code>404.html</code> file.
+  </p>
 
   <p>
-    Of course you need also to enable GitHub Pages in your repository settings.
+    Of course you need also to enable <em>GitHub Pages</em> in your repository
+    settings. You will notice there are two kinds of static websites you can
+    create.
+  </p>
+
+  <p>
+    One is a website that will have an homepage like
+    <code>https://YOUR-DOMAIN/YOUR-REPO-NAME</code> where
+    <code>YOUR-DOMAIN</code> will default to
+    <code>https://YOUR-ACCOUNT-OR-ORGANIZATION.github.io</code>. You can also
+    set your custom domain, check out the
+    <a href="https://pages.github.com/">official GitHub Pages documentation</a>.
+  </p>
+
+  <p>
+    The second one happens when the repository name is
+    <code>YOUR-ACCOUNT-OR-ORGANIZATION.github.io</code> and in this case the
+    homepage will be <code>https://YOUR-DOMAIN</code>.
+  </p>
+
+  <p>
+    To simulate this behaviour locally, the
+    <a
+      href="https://github.com/fibo/github-pages-router/blob/main/server.js"
+      target="_blank"
+      >development server</a
+    >
+    reads the <code>homepage</code> attribute in the
+    <a
+      href="https://github.com/fibo/github-pages-router/blob/main/package.json"
+      target="_blank"
+      >package.json</a
+    >
   </p>
 </article>

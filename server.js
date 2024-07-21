@@ -1,12 +1,17 @@
 import { exec } from "child_process";
 import { createReadStream } from "fs";
-import { access } from "fs/promises";
+import { access, readFile } from "fs/promises";
 import { createServer } from "http";
 import os from "os";
 import { dirname, extname, join } from "path";
 import { fileURLToPath } from "url";
 
 const PORT = process.env.PORT ?? 3000;
+
+const pkg = await readFile("./package.json").then(JSON.parse);
+const basePathname = new URL(pkg.homepage).pathname.split("/")[1];
+
+const baseUrl = `http://localhost:${PORT}/${basePathname == "" ? "" : `${basePathname}/`}`;
 
 const fileExtensionToMimeTypeMap = new Map()
   .set("css", "text/css; charset=UTF-8")
@@ -15,9 +20,14 @@ const fileExtensionToMimeTypeMap = new Map()
 
 createServer(async (req, res) => {
   const STATIC_PATH = dirname(fileURLToPath(import.meta.url));
-  const pathParts = [STATIC_PATH, req.url];
 
-  if (req.url.endsWith("/")) pathParts.push("index.html");
+  const url = req.url
+    .split("/")
+    .filter((part) => part != basePathname)
+    .join("/");
+  const pathParts = [STATIC_PATH, url];
+
+  if (url.endsWith("/")) pathParts.push("index.html");
 
   let filePath = join(...pathParts);
 
@@ -47,10 +57,9 @@ createServer(async (req, res) => {
   res.writeHead(200, { "Content-Type": mimeType });
   stream.pipe(res);
 }).listen(PORT, () => {
-  const localAddress = `http://localhost:${PORT}/`;
-  console.info(`Server started on ${localAddress}`);
+  console.info(`Server started on ${baseUrl}`);
   const platform = os.platform();
-  if (platform === "darwin") exec(`open ${localAddress}`);
-  if (platform === "linux") exec(`xdg-open ${localAddress}`);
-  if (platform === "win32") exec(`start ${localAddress}`);
+  if (platform === "darwin") exec(`open ${baseUrl}`);
+  if (platform === "linux") exec(`xdg-open ${baseUrl}`);
+  if (platform === "win32") exec(`start ${baseUrl}`);
 });
