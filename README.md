@@ -1,4 +1,4 @@
-# GitHub Pages router
+# GitHub Pages Router
 
 > A client side router for GitHub Pages, with View Transitions API
 
