@@ -200,10 +200,11 @@
   }
 
   :not(pre) > code {
+    font-size: 1rem;
     background-color: var(--code-background-color);
     text-wrap: nowrap;
     color: black;
-    padding-inline: 0.25em;
+    padding: 0.125em 0.25em;
     border-radius: 0.125em;
   }
 
@@ -235,5 +236,8 @@
   }
   * {
     margin: 0;
+  }
+  *::selection {
+    background-color: gainsboro;
   }
 }
