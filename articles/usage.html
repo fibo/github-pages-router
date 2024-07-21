@@ -1,3 +1,87 @@
 <article>
   <h2>Usage</h2>
+
+  <p>
+    Yes, as you might guess this website uses <em>GitHub Pages Router</em>. You
+    can also get started taking a look to
+    <a
+      href="https://github.com/fibo/github-pages-router/blob/main/index.html"
+      target="_blank"
+      >its index.html</a
+    >
+    as a working example.
+  </p>
+
+  <h3>Installation</h3>
+
+  <p>
+    First of all import somehow
+    <a
+      href="https://github.com/fibo/github-pages-router/blob/dist/github-pages-router.js"
+      target="_blank"
+    >
+      github-pages-router.js
+    </a>
+    in your HTML page. Remember that you need both <code>index.html</code> and
+    <code>404.html</code> with the same content.
+  </p>
+
+  <h3>Declare your routes</h3>
+
+  <p>
+    Add a single <code>ghp-router</code> tag in your HTML, and one
+    <code>ghp-route</code> tag for every of your routes. Something like
+  </p>
+
+  <pre><code>&lt;ghp-router&gt;
+
+  &lt;ghp-route
+    href="./route1"
+    content="./path/to/content1.html"
+  &gt;&lt;/ghp-route&gt;
+
+  &lt;ghp-route
+    href="./route2"
+    content="./path/to/content2.html"
+  &gt;&lt;/ghp-route&gt;
+
+  &lt;!-- Your HTML layout --&gt;
+
+  &lt;main&gt;
+    &lt;!--
+      Leave this empty.
+      Your route related HTML content will be loaded here.
+    --&gt;
+  &lt;/main&gt;
+
+&lt;/ghp-router&gt;</code></pre>
+
+  <p>
+    The <code>ghp-router</code> element accepts an optional
+    <code>outlet</code> attribute: its value defaults to <code>main</code> and
+    must be a selector that matches the element that wraps the content.
+  </p>
+
+  <h3>Internal links</h3>
+
+  <p>
+    Use a <code>ghp-link</code> or a <code>ghp-navlink</code> tag to wrap your
+    internal anchors.
+  </p>
+
+  <pre><code>&lt;ghp-link&gt;
+  &lt;a href="./route1"&gt;&lt;/a&gt;
+&lt;/ghp-link&gt;</code></pre>
+
+  <p>
+    The <code>ghp-navlink</code> will add an
+    <code>aria-current="page"</code> ARIA attribute to the anchor it wraps
+    whenever it points to the current page. It can be used to highlight current
+    selected link, for example in this website CSS I added something like
+  </p>
+
+  <pre><code>nav a[aria-current="page"] {
+  background-color: hsla(200, 60%, 60%, 0.2);
+  cursor: default;
+}</code></pre>
 </article>

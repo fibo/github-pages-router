@@ -1,6 +1,5 @@
 (function GitHubPagesRouter() {
   const contentMap = new Map();
-  const contentElement = document.querySelector("main");
 
   const { baseURI } = document;
 
@@ -29,10 +28,15 @@
    * Web component <ghp-router>. All other ghp-* components must be inside a <ghp-router>.
    */
   class GHPRouter extends HTMLElement {
+    contentElement = undefined;
     connectedCallback() {
       addEventListener("popstate", this);
       const contentUrl = contentUrlFromLocation(location.toString());
       if (contentUrl) this.viewTransition(contentUrl);
+      this.contentElement = document.querySelector(
+        this.getAttribute("outlet") ?? "main",
+      );
+      if (!this.contentElement) console.error("Cannot find contentElement");
     }
     handleEvent(event) {
       if (event.type == "popstate") {
@@ -46,7 +50,6 @@
     navigate(event) {
       event.preventDefault();
       const { href } = event.target;
-      console.log(href, document.location.toString());
       if (href == document.location.toString()) return;
       const contentUrl = contentUrlFromLocation(href);
       if (!contentUrl) return;
@@ -60,6 +63,8 @@
       });
     }
     async updateContent(url) {
+      const { contentElement } = this;
+      if (!contentElement) return;
       try {
         if (contentMap.has(url)) {
           contentElement.innerHTML = contentMap.get(url);

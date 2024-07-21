@@ -201,6 +201,7 @@
 
   :not(pre) > code {
     background-color: var(--code-background-color);
+    text-wrap: nowrap;
     color: black;
     padding-inline: 0.25em;
     border-radius: 0.125em;
