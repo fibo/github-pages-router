@@ -22,7 +22,7 @@
     :root {
       --background-color: #40464a;
       --text-color: #d0cfc7;
-      --accent-color: #3788d6;
+      --accent-color: #37b8d6;
     }
   }
 
@@ -66,26 +66,41 @@
 
   nav {
     grid-area: navigation;
+
+    .contents-title {
+      padding-left: 0.5em;
+    }
   }
 
   main {
     grid-area: content;
+
+    max-width: 80ch;
+    text-wrap: pretty;
   }
 
   footer {
     grid-area: footer;
+  }
+
+  p {
+    padding: 0.5em 0.25em;
   }
 }
 
 @layer typography {
   :root {
     --font-serif: "Averia Serif Libre", serif;
-    --font-sans-serif: "Optima", sans-serif;
+    --font-sans-serif: "Noto Sans", sans-serif;
   }
 
   body {
+    font-size: 17px;
     font-family: var(--font-sans-serif);
     font-optical-sizing: auto;
+    font-variation-settings: "wdth" 100;
+    font-style: normal;
+    font-weight: normal;
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
   }
@@ -97,17 +112,33 @@
     font: inherit;
   }
 
+  header blockquote {
+    padding-left: 1em;
+  }
+
   :any-link,
   h1,
-  h2 {
+  h2,
+  .contents-title {
     font-family: var(--font-serif);
   }
 
-  h1 {
-    font-size: 2.25em;
+  h1,
+  h2 {
+    letter-spacing: -1px;
   }
+
   h1 {
     font-size: 2em;
+  }
+  h2 {
+    font-size: 1.75em;
+  }
+
+  .contents-title {
+    font-size: 1.2em;
+    line-height: 2.2;
+    font-weight: 600;
   }
 }
 

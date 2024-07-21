@@ -1,6 +1,6 @@
 # GitHub Pages router
 
-> client side router for GitHub Pages, with transition API
+> A client side router for GitHub Pages, with Transition API
 
 ## Articles
 
