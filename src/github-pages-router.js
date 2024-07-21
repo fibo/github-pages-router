@@ -1,23 +1,11 @@
 (function GitHubPagesRouter() {
   const contentMap = new Map();
 
-  const { baseURI } = document;
-
   const routes = [];
 
   routes.push({ route: "./", contentUrl: "./articles/overview.html" });
   routes.push({ route: "./setup", contentUrl: "./articles/setup.html" });
   routes.push({ route: "./usage", contentUrl: "./articles/usage.html" });
-
-  const navlinks = new Set();
-
-  function contentUrlFromLocation(url) {
-    const matchedRoute = routes.find(
-      ({ route }) => url == new URL(route, baseURI),
-    );
-    if (matchedRoute)
-      return new URL(matchedRoute.contentUrl, baseURI).toString();
-  }
 
   function defineComponent(elementName, ElementClass) {
     if (!customElements.get(elementName))
@@ -29,9 +17,10 @@
    */
   class GHPRouter extends HTMLElement {
     contentElement = undefined;
+    navlinks = new Set();
     connectedCallback() {
       addEventListener("popstate", this);
-      const contentUrl = contentUrlFromLocation(location.toString());
+      const contentUrl = this.contentUrlFromLocation(location.toString());
       if (contentUrl) this.viewTransition(contentUrl);
       this.contentElement = document.querySelector(
         this.getAttribute("outlet") ?? "main",
@@ -40,9 +29,16 @@
     }
     handleEvent(event) {
       if (event.type == "popstate") {
-        const contentUrl = contentUrlFromLocation(location.toString());
+        const contentUrl = this.contentUrlFromLocation(location.toString());
         if (contentUrl) this.viewTransition(contentUrl);
       }
+    }
+    contentUrlFromLocation(url) {
+      const matchedRoute = routes.find(
+        ({ route }) => url == new URL(route, document.baseURI),
+      );
+      if (matchedRoute)
+        return new URL(matchedRoute.contentUrl, document.baseURI).toString();
     }
     /**
      * Handle anchor click event.
@@ -51,7 +47,7 @@
       event.preventDefault();
       const { href } = event.target;
       if (href == document.location.toString()) return;
-      const contentUrl = contentUrlFromLocation(href);
+      const contentUrl = this.contentUrlFromLocation(href);
       if (!contentUrl) return;
       history.pushState({}, "", href);
       this.viewTransition(contentUrl);
@@ -74,7 +70,7 @@
           contentMap.set(url, text);
           contentElement.innerHTML = text;
         }
-        for (const navlink of navlinks.values()) navlink.setAriaCurrent();
+        for (const navlink of this.navlinks.values()) navlink.setAriaCurrent();
       } catch (error) {
         console.error(error);
       }
@@ -134,10 +130,10 @@
       }
       this.anchor?.addEventListener("click", this);
       this.setAriaCurrent();
-      navlinks.add(this);
+      this.router?.navlinks.add(this);
     }
     disconnectedCallback() {
-      navlinks.delete(this);
+      this.router?.navlinks.delete(this);
     }
     get anchor() {
       return this.querySelector("a");
