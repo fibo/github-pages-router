@@ -77,6 +77,12 @@
     header {
       padding-bottom: 0.75em;
     }
+
+    nav ghp-navlink,
+    nav a {
+      display: block;
+      width: 100%;
+    }
   }
 
   nav .contents-title {
@@ -173,9 +179,22 @@
     outline-color: var(--accent-color);
   }
 
-  nav ul {
-    list-style-type: none;
-    padding-left: 1.5em;
+  ul {
+    margin-bottom: 1.5em;
+  }
+
+  nav {
+    ul {
+      list-style-type: none;
+      padding-left: 1em;
+    }
+    a {
+      padding-inline: 0.5em;
+    }
+    a[aria-current="page"] {
+      background-color: hsla(200, 60%, 60%, 0.2);
+      cursor: default;
+    }
   }
 
   pre {

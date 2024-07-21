@@ -27,31 +27,48 @@
     <link rel="canonical" href="https://fibo.github.io/github-pages-router" />
   </head>
   <body>
-    <div class="layout">
-      <header>
-        <h1>GitHub Pages Router</h1>
-        <blockquote>
-          A client side router for GitHub Pages, with Transitions API.
-        </blockquote>
-      </header>
+    <ghp-router>
+      <div class="layout">
+        <header>
+          <h1>GitHub Pages Router</h1>
+          <blockquote>
+            A client side router for GitHub Pages, with Transitions API.
+          </blockquote>
+        </header>
 
-      <nav role="navigation">
-        <span class="contents-title">Contents</span>
-        <ul>
-          <li><a href="./">Overview</a></li>
-          <li><a href="./setup">Setup</a></li>
-        </ul>
-      </nav>
+        <nav role="navigation">
+          <span class="contents-title">Contents</span>
+          <ul>
+            <li>
+              <ghp-navlink>
+                <a href="./">Overview</a>
+              </ghp-navlink>
+            </li>
 
-      <main></main>
+            <li>
+              <ghp-navlink>
+                <a href="./setup">Setup</a>
+              </ghp-navlink>
+            </li>
 
-      <footer>
-        GitHub:
-        <a href="https://github.com/fibo/github-pages-router"
-          >fibo/github-pages-router</a
-        >
-      </footer>
-    </div>
+            <li>
+              <ghp-navlink>
+                <a href="./usage">Usage</a>
+              </ghp-navlink>
+            </li>
+          </ul>
+        </nav>
+
+        <main></main>
+
+        <footer>
+          GitHub:
+          <a href="https://github.com/fibo/github-pages-router"
+            >fibo/github-pages-router</a
+          >
+        </footer>
+      </div>
+    </ghp-router>
     <script src="./navigation.js"></script>
   </body>
 </html>
