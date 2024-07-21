@@ -82,6 +82,10 @@
   nav .contents-title {
     padding-left: 0.5em;
   }
+
+  footer {
+    margin-top: 2.5em;
+  }
 }
 
 @layer typography {
@@ -150,6 +154,7 @@
   main {
     max-width: 80ch;
     text-wrap: pretty;
+    padding-inline: 0.25em;
   }
 
   p {

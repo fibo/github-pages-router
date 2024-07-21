@@ -2,14 +2,18 @@ const anchorSelector = "nav a";
 const contentMap = new Map();
 const contentElement = document.querySelector("main");
 
-const defaultRouteHref = "/articles/overview.html";
 const { baseURI } = document;
 
+const routes = [];
+
+routes.push({ route: "./setup", contentUrl: "./articles/setup.html" });
+routes.push({ route: "./", contentUrl: "./articles/overview.html" });
+
 function contentUrlFromLocation(url) {
-  if (url == new URL("./setup", baseURI).toString())
-    return new URL("/articles/setup.html", baseURI).toString();
-  if (url == new URL("./", baseURI).toString())
-    return new URL("/articles/overview.html", baseURI).toString();
+  const matchedRoute = routes.find(
+    ({ route }) => url == new URL(route, baseURI),
+  );
+  if (matchedRoute) return new URL(matchedRoute.contentUrl, baseURI).toString();
 }
 
 async function updateContent(url) {
