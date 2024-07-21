@@ -18,6 +18,8 @@
     create.
   </p>
 
+  <h3>First kind</h3>
+
   <p>
     The first kind happens when your repository has a name like
     <code>YOUR-ACCOUNT-OR-ORGANIZATION.github.io</code>. In this case the
@@ -27,6 +29,8 @@
     <strong>custom domain</strong>, check out the
     <a href="https://pages.github.com/">official GitHub Pages documentation</a>.
   </p>
+
+  <h3>Second kind</h3>
 
   <p>
     The second kind is a website that will have an homepage like
@@ -46,11 +50,27 @@
       development server
     </a>
     reads the <code>homepage</code> attribute in the
+  </p>
+
+  <h3>Example</h3>
+
+  <p>
+    For instance, this website kind is of <em>second kind</em>. It has this
+    <code>base</code> tag:
+  </p>
+
+  <pre><code>&lt;base href="/github-pages-router/" /&gt;</code></pre>
+
+  <p>
+    And the
     <a
       href="https://github.com/fibo/github-pages-router/blob/main/package.json"
       target="_blank"
     >
       package.json
     </a>
+    has the following <code>homepage</code> attribute:
   </p>
+
+  <pre><code>"homepage": "https://fibo.github.io/github-pages-router/",</code></pre>
 </article>
