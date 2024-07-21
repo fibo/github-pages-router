@@ -3,13 +3,13 @@ const contentMap = new Map();
 const contentElement = document.querySelector("main");
 
 const defaultRouteHref = "/articles/overview.html";
-const routes = new Map()
-  .set(defaultRouteHref, "/overview")
-  .set("/articles/setup.html", "/setup");
+const { baseURI } = document;
 
 function contentUrlFromLocation(url) {
-  if (url.endsWith("setup")) return "/articles/setup.html";
-  if (url.endsWith("overview")) return "/articles/overview.html";
+  if (url == new URL("./setup", baseURI).toString())
+    return new URL("/articles/setup.html", baseURI).toString();
+  if (url == new URL("./", baseURI).toString())
+    return new URL("/articles/overview.html", baseURI).toString();
 }
 
 async function updateContent(url) {
@@ -45,12 +45,11 @@ addEventListener("load", () => {
       viewTransition(contentUrl);
     });
 
-  const contentUrl =
-    contentUrlFromLocation(location.toString()) ?? defaultRouteHref;
-  viewTransition(contentUrl);
+  const contentUrl = contentUrlFromLocation(location.toString());
+  if (contentUrl) viewTransition(contentUrl);
 });
 
 addEventListener("popstate", () => {
   const contentUrl = contentUrlFromLocation(location.toString());
-  viewTransition(contentUrl);
+  if (contentUrl) viewTransition(contentUrl);
 });
