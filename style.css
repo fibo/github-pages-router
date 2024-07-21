@@ -5,6 +5,7 @@
     --background-color: #f4f4ed;
     --text-color: #170900;
     --accent-color: #1779d8;
+    --code-background-color: #e3e3d3;
   }
 
   @media (prefers-color-scheme: dark) {
@@ -12,6 +13,7 @@
       --background-color: #40464a;
       --text-color: #d0cfc7;
       --accent-color: #37b8d6;
+      --code-background-color: #afb19c;
     }
   }
 
@@ -195,6 +197,13 @@
       background-color: hsla(200, 60%, 60%, 0.2);
       cursor: default;
     }
+  }
+
+  :not(pre) > code {
+    background-color: var(--code-background-color);
+    color: black;
+    padding-inline: 0.25em;
+    border-radius: 0.125em;
   }
 
   pre {
