@@ -1,12 +1,4 @@
 (function GitHubPagesRouter() {
-  const contentMap = new Map();
-
-  const routes = [];
-
-  routes.push({ route: "./", contentUrl: "./articles/overview.html" });
-  routes.push({ route: "./setup", contentUrl: "./articles/setup.html" });
-  routes.push({ route: "./usage", contentUrl: "./articles/usage.html" });
-
   function defineComponent(elementName, ElementClass) {
     if (!customElements.get(elementName))
       customElements.define(elementName, ElementClass);
@@ -18,10 +10,11 @@
   class GHPRouter extends HTMLElement {
     contentElement = undefined;
     navlinks = new Set();
+    contentMap = new Map();
+    routes = [];
+
     connectedCallback() {
       addEventListener("popstate", this);
-      const contentUrl = this.contentUrlFromLocation(location.toString());
-      if (contentUrl) this.viewTransition(contentUrl);
       this.contentElement = document.querySelector(
         this.getAttribute("outlet") ?? "main",
       );
@@ -34,11 +27,11 @@
       }
     }
     contentUrlFromLocation(url) {
-      const matchedRoute = routes.find(
-        ({ route }) => url == new URL(route, document.baseURI),
+      const matchedRoute = this.routes.find(
+        ({ href }) => url == new URL(href, document.baseURI),
       );
       if (matchedRoute)
-        return new URL(matchedRoute.contentUrl, document.baseURI).toString();
+        return new URL(matchedRoute.content, document.baseURI).toString();
     }
     /**
      * Handle anchor click event.
@@ -62,12 +55,12 @@
       const { contentElement } = this;
       if (!contentElement) return;
       try {
-        if (contentMap.has(url)) {
-          contentElement.innerHTML = contentMap.get(url);
+        if (this.contentMap.has(url)) {
+          contentElement.innerHTML = this.contentMap.get(url);
         } else {
           const response = await fetch(url);
           const text = await response.text();
-          contentMap.set(url, text);
+          this.contentMap.set(url, text);
           contentElement.innerHTML = text;
         }
         for (const navlink of this.navlinks.values()) navlink.setAriaCurrent();
@@ -89,6 +82,44 @@
   }
 
   /**
+   * Web component <ghp-route>.
+   *
+   * It requires the following attributes:
+   * - route
+   * - content: URL to HTML content file.
+   *
+   * @example
+   * ```html
+   * <ghp-route route="./" content="./path/to/file.html"></ghp-route>
+   * ```
+   */
+  class GHPRoute extends HTMLElement {
+    router = undefined;
+
+    connectedCallback() {
+      try {
+        this.router = findParentRouter(this);
+      } catch (error) {
+        console.error(error);
+        return;
+      }
+      const href = this.getAttribute("href");
+      const content = this.getAttribute("content");
+      if (!href || !content) {
+        console.error("Missing href or content attribute");
+        return;
+      }
+      this.router.routes.push({ href, content });
+      if (new URL(href, document.baseURI).toString() == location.toString())
+        this.router.viewTransition(
+          new URL(content, document.baseURI).toString(),
+        );
+    }
+  }
+
+  defineComponent("ghp-route", GHPRoute);
+
+  /**
    * Web component <ghp-link> handles an anchor that points to a route.
    * It must wrap the anchor, and will override its click event.
    * @example
@@ -98,6 +129,7 @@
    */
   class GHPLink extends HTMLElement {
     router = undefined;
+
     connectedCallback() {
       try {
         this.router = findParentRouter(this);
@@ -122,6 +154,7 @@
    */
   class GHPNavlink extends HTMLElement {
     router = undefined;
+
     connectedCallback() {
       try {
         this.router = findParentRouter(this);

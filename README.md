@@ -1,15 +1,34 @@
 # GitHub Pages router
 
-> A client side router for GitHub Pages, with Transition API
+> A client side router for GitHub Pages, with View Transitions API
 
-## Articles
+## Usage
 
-The _articles/_ folder contains a set of HTML snippets that are loaded into the page.
+Declare routes and links using `ghp-*` custom elements, for example
 
-## Development
+```html
+<ghp-router>
+  <ghp-route route="./" content="./articles/overview.html"></ghp-route>
+  <ghp-route route="./usage" content="./articles/usage.html"></ghp-route>
 
-Launch dev server, with
+  <nav>
+    <ghp-navlink>
+      <a href="./">Overview</a>
+    </ghp-navlink>
 
-```sh
-npm start
+    <ghp-navlink>
+      <a href="./usage">Usage</a>
+    </ghp-navlink>
+  </nav>
+
+  <main>
+    <!-- Content will be loaded here -->
+  </main>
+</ghp-router>
 ```
+
+See [documentation and examples here](https://fibo.github.io/github-pages-router/).
+
+## License
+
+[MIT](http://fibo.github.io/mit-license)

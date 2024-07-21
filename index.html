@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="A client side router for GitHub Pages, with Transitions API"
+      content="A client side router for GitHub Pages, with View Transitions API"
     />
     <title>GitHub Pages Router</title>
     <base href="/github-pages-router/" />
@@ -28,11 +28,15 @@
   </head>
   <body>
     <ghp-router>
+      <ghp-route href="./" content="./articles/overview.html"></ghp-route>
+      <ghp-route href="./setup" content="./articles/setup.html"></ghp-route>
+      <ghp-route href="./usage" content="./articles/usage.html"></ghp-route>
+
       <div class="layout">
         <header>
           <h1>GitHub Pages Router</h1>
           <blockquote>
-            A client side router for GitHub Pages, with Transitions API.
+            A client side router for GitHub Pages, with View Transitions API.
           </blockquote>
         </header>
 

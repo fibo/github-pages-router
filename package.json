@@ -1,9 +1,8 @@
 {
   "name": "github-pages-router",
   "version": "1.0.0",
-  "private": true,
   "license": "MIT",
-  "description": "A client side router for GitHub Pages, with Transitions API",
+  "description": "A client side router for GitHub Pages, with View Transitions API",
   "type": "module",
   "homepage": "https://fibo.github.io/github-pages-router/",
   "scripts": {
