@@ -1,3 +1,4 @@
+/*! fibo.github.io/github-pages-router • MIT License */
 (function GitHubPagesRouter() {
   function defineComponent(elementName, ElementClass) {
     if (!customElements.get(elementName))
