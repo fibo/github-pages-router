@@ -3,30 +3,32 @@
   <p>
     The main trick to enable client side routing is to configure the server side
     router to serve content when the request gets a <code>404</code> HTTP status
-    code. On <em>GitHub Pages</em>, you can achieve it creating a
-    <code>404.html</code> file.
+    code.
+    On <em>GitHub Pages</em>, you can achieve it by creating a <code>404.html</code> file.
   </p>
 
   <p>
-    You can simply copy your <em>index.html</em> into a <em>404.html</em> file
-    (and keep them synced).
+    Of course, it is not required that both files have the same content but
+    you can start simply coping your <em>index.html</em> into a <em>404.html</em> file.
   </p>
 
   <p>
-    Of course you need also to enable <em>GitHub Pages</em> in your repository
-    settings. You will notice there are two kinds of static websites you can
-    create.
+    Of course you need also to enable <em>GitHub Pages</em> in your repository settings.
+    You will notice there are two kinds of static websites you can create.
   </p>
 
   <h3>First kind</h3>
 
   <p>
     The first kind happens when your repository has a name like
-    <code>YOUR-ACCOUNT-OR-ORGANIZATION.github.io</code>. In this case the
-    homepage will be <code>https://YOUR-DOMAIN/</code> where
-    <code>YOUR-DOMAIN</code> will default to
-    <code>YOUR-ACCOUNT-OR-ORGANIZATION.github.io</code>. You can also set your
-    <strong>custom domain</strong>, check out the
+    <code>YOUR-ACCOUNT-OR-ORGANIZATION.github.io</code>.
+    In this case the homepage will be
+    <code>https://YOUR-DOMAIN/</code>
+    where
+    <code>YOUR-DOMAIN</code>
+    will default to
+    <code>YOUR-ACCOUNT-OR-ORGANIZATION.github.io</code>.
+    You can also set your <strong>custom domain</strong>, check out the
     <a href="https://pages.github.com/">official GitHub Pages documentation</a>.
   </p>
 
@@ -34,19 +36,16 @@
 
   <p>
     The second kind is a website that will have an homepage like
-    <code>https://YOUR-DOMAIN/YOUR-REPO-NAME/</code>. In this case it is
-    required that you add a <code>base</code> tag in your HTML
-    <code>head</code>, something like the following:
+    <code>https://YOUR-DOMAIN/YOUR-REPO-NAME/</code>.
+    In this case it is required that you add a <code>base</code> tag in your HTML <code>head</code>,
+    something like the following:
   </p>
 
   <pre><code>&lt;base href="/YOUR-REPO-NAME/" /&gt;</code></pre>
 
   <p>
     To simulate this behaviour locally, the
-    <a
-      href="https://github.com/fibo/github-pages-router/blob/main/server.js"
-      target="_blank"
-    >
+    <a href="https://github.com/fibo/github-pages-router/blob/main/server.js" target="_blank">
       development server
     </a>
     reads the <code>homepage</code> attribute in the <em>package.json</em>.
@@ -62,10 +61,7 @@
 
   <p>
     And the
-    <a
-      href="https://github.com/fibo/github-pages-router/blob/main/package.json"
-      target="_blank"
-    >
+    <a href="https://github.com/fibo/github-pages-router/blob/main/package.json" target="_blank">
       package.json
     </a>
     has the following <code>homepage</code> attribute:

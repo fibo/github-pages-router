@@ -6,26 +6,16 @@
   "type": "module",
   "homepage": "https://fibo.github.io/github-pages-router/",
   "exports": {
-    ".": {
-      "import": "./dist/github-pages-router.js"
-    }
+    "import": "./dist/github-pages-router.js"
   },
   "scripts": {
-    "build": "esbuild --minify-whitespace --outdir=dist src/github-pages-router.js",
-    "prettier": "prettier --write .",
-    "prettier--check": "prettier --check .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "esbuild --minify-whitespace --outdir=dist src/github-pages-router.js"
   },
   "author": {
     "name": "Gianluca Casati",
     "url": "http://fibo.github.io"
   },
   "devDependencies": {
-    "esbuild": "^0.23.0",
-    "pre-commit": "^1.2.2",
-    "prettier": "^3.3.2"
-  },
-  "pre-commit": [
-    "prettier--check"
-  ]
+    "esbuild": "^0.23.0"
+  }
 }

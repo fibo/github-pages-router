@@ -21,20 +21,14 @@ const fileExtensionToMimeTypeMap = new Map()
 createServer(async (req, res) => {
   const STATIC_PATH = dirname(fileURLToPath(import.meta.url));
 
-  const url = req.url
-    .split("/")
-    .filter((part) => part != basePathname)
-    .join("/");
+  const url = req.url.split("/").filter((part) => part != basePathname).join("/");
   const pathParts = [STATIC_PATH, url];
 
   if (url.endsWith("/")) pathParts.push("index.html");
 
   let filePath = join(...pathParts);
 
-  const exists = await access(filePath).then(
-    () => true,
-    () => false,
-  );
+  const exists = await access(filePath).then(() => true, () => false);
 
   const sendText = (statusCode, text) => {
     res.writeHead(statusCode, { "Content-Type": "text/html; charset=utf-8" });
@@ -57,9 +51,10 @@ createServer(async (req, res) => {
   res.writeHead(200, { "Content-Type": mimeType });
   stream.pipe(res);
 }).listen(PORT, () => {
-  console.info(`Server started on ${baseUrl}`);
-  const platform = os.platform();
-  if (platform === "darwin") exec(`open ${baseUrl}`);
-  if (platform === "linux") exec(`xdg-open ${baseUrl}`);
-  if (platform === "win32") exec(`start ${baseUrl}`);
+  switch(os.platform()) {
+    case "darwin": exec(`open ${baseUrl}`);
+    case "linux": exec(`xdg-open ${baseUrl}`);
+    case "win32": exec(`start ${baseUrl}`);
+    default: console.info(`Server started on ${baseUrl}`);
+  }
 });

@@ -2,12 +2,9 @@
   <h2>Usage</h2>
 
   <p>
-    Yes, as you might guess this website uses <em>GitHub Pages Router</em>. You
-    can also get started taking a look to
-    <a
-      href="https://github.com/fibo/github-pages-router/blob/main/index.html"
-      target="_blank"
-    >
+    Yes, as you might guess this website uses <em>GitHub Pages Router</em>.
+    You can also get started taking a look to
+    <a href="https://github.com/fibo/github-pages-router/blob/main/index.html" target="_blank">
       its index.html
     </a>
     as a working example.
@@ -17,14 +14,11 @@
 
   <p>
     First of all import somehow
-    <a
-      href="https://github.com/fibo/github-pages-router/blob/dist/github-pages-router.js"
-      target="_blank"
-    >
+    <a href="https://github.com/fibo/github-pages-router/blob/dist/github-pages-router.js" target="_blank">
       github-pages-router.js
     </a>
-    in your HTML page. Remember that you need both <code>index.html</code> and
-    <code>404.html</code> with the same content.
+    in your HTML page.
+    Remember that you need both <code>index.html</code> and <code>404.html</code>.
   </p>
 
   <p>
@@ -68,16 +62,16 @@
 &lt;/ghp-router&gt;</code></pre>
 
   <p>
-    The <code>ghp-router</code> element accepts an optional
-    <code>outlet</code> attribute: its value defaults to <code>main</code> and
-    must be a selector that matches the element that wraps the content.
+    The <code>ghp-router</code> element accepts an optional <code>outlet</code> attribute:
+    it must be a selector that matches the element that wraps the content;
+    its value defaults to <code>main</code>.
   </p>
 
   <h3>Internal links</h3>
 
   <p>
-    Use a <code>ghp-link</code> or a <code>ghp-navlink</code> tag to wrap your
-    internal anchors. For example:
+    Use a <code>ghp-link</code> or a <code>ghp-navlink</code> tag to wrap your internal anchors.
+    For example:
   </p>
 
   <pre><code>&lt;ghp-link&gt;
@@ -85,10 +79,10 @@
 &lt;/ghp-link&gt;</code></pre>
 
   <p>
-    The <code>ghp-navlink</code> will add an
-    <code>aria-current="page"</code> ARIA attribute to the anchor it wraps
-    whenever it points to the current page. It can be used to highlight current
-    selected link, for example in this website CSS I added something like
+    The <code>ghp-navlink</code> will add an <code>aria-current="page"</code> ARIA attribute
+    to the anchor it wraps whenever it points to the current page.
+    It can be used to highlight current selected link,
+    for example in this website CSS I added something like
   </p>
 
   <pre><code>nav a[aria-current="page"] {
