@@ -1,14 +1,14 @@
 <article>
   <h2>Router setup</h2>
   <p>
-    The main trick to enable client side routing is to configure the server side
-    router to serve content when the request gets a <code>404</code> HTTP status
-    code.
-    On <em>GitHub Pages</em>, you can achieve it by creating a <code>404.html</code> file.
+    Generally speaking, the main trick to enable client side routing is
+    to configure the server side router to serve content
+    whenever the request gets a <code>404</code> HTTP status code.
+    On <em>GitHub Pages</em>, you can achieve this by creating a <code>404.html</code> file.
   </p>
 
   <p>
-    Of course, it is not required that both files have the same content but
+    It is not required that both files have the same content but
     you can start simply coping your <em>index.html</em> into a <em>404.html</em> file.
   </p>
 
@@ -22,12 +22,19 @@
   <p>
     The first kind happens when your repository has a name like
     <code>YOUR-ACCOUNT-OR-ORGANIZATION.github.io</code>.
+  </p>
+
+  <p>
     In this case the homepage will be
     <code>https://YOUR-DOMAIN/</code>
+    <br>
     where
     <code>YOUR-DOMAIN</code>
     will default to
     <code>YOUR-ACCOUNT-OR-ORGANIZATION.github.io</code>.
+  </p>
+
+  <p>
     You can also set your <strong>custom domain</strong>, check out the
     <a href="https://pages.github.com/">official GitHub Pages documentation</a>.
   </p>
@@ -37,6 +44,9 @@
   <p>
     The second kind is a website that will have an homepage like
     <code>https://YOUR-DOMAIN/YOUR-REPO-NAME/</code>.
+  </p>
+
+  <p>
     In this case it is required that you add a <code>base</code> tag in your HTML <code>head</code>,
     something like the following:
   </p>
@@ -45,10 +55,8 @@
 
   <p>
     To simulate this behaviour locally, the
-    <a href="https://github.com/fibo/github-pages-router/blob/main/server.js" target="_blank">
-      development server
-    </a>
-    reads the <code>homepage</code> attribute in the <em>package.json</em>.
+    <ghp-link><a href="./server">dev server</a></ghp-link>
+    reads the <code>homepage</code> attribute in your <em>package.json</em>.
   </p>
 
   <h3>Example</h3>
@@ -62,7 +70,7 @@
   <p>
     And the
     <a href="https://github.com/fibo/github-pages-router/blob/main/package.json" target="_blank">
-      package.json
+      repo package.json
     </a>
     has the following <code>homepage</code> attribute:
   </p>
