@@ -146,6 +146,7 @@
   }
   h3 {
     font-size: 1.25em;
+    margin: 1em 0 0.5em;
   }
 
   :any-link {
@@ -166,7 +167,7 @@
   }
 
   p {
-    padding: 0.25em 0.25em 1em;
+    padding: 0.25em 0.25em 0.75em;
   }
 }
 

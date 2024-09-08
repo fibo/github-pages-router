@@ -1,15 +1,16 @@
 {
   "name": "github-pages-router",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "license": "MIT",
   "description": "A client side router for GitHub Pages, with View Transitions API",
   "type": "module",
   "homepage": "https://fibo.github.io/github-pages-router/",
+  "bin": "./server.js",
   "exports": {
     "import": "./dist/github-pages-router.js"
   },
   "scripts": {
-    "build": "esbuild --minify-whitespace --outdir=dist src/github-pages-router.js"
+    "build": "esbuild --minify-whitespace --outdir=. github-pages-router.ts"
   },
   "author": {
     "name": "Gianluca Casati",
