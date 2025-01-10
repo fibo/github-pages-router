@@ -59,13 +59,13 @@
       const cachedContent = contentMap.get(url)
       if (cachedContent) {
         contentElement.innerHTML = cachedContent
-        return
+      } else {
+        // Content is not cached, try to fetch it.
+        const response = await fetch(url)
+        const text = await response.text()
+        contentMap.set(url, text)
+        contentElement.innerHTML = text
       }
-      // Content is not cached, try to fetch it.
-      const response = await fetch(url)
-      const text = await response.text()
-      contentMap.set(url, text)
-      contentElement.innerHTML = text
       // Finally, update navlinks.
       for (const navlink of navlinks.values())
         navlink.setAriaCurrent()
