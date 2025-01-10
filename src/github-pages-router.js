@@ -1,9 +1,5 @@
 /*! fibo.github.io/github-pages-router • MIT License */
 (function GitHubPagesRouter() {
-  function defineComponent(elementName, ElementClass) {
-    if (customElements.get(elementName)) return
-    customElements.define(elementName, ElementClass)
-  }
 
   /**
    * Web component <ghp-router>. All other ghp-* components must be inside a <ghp-router>.
@@ -47,12 +43,14 @@
       this.viewTransition(contentUrl)
     }
 
-    viewTransition(contentUrl) {
-      if ('startViewTransition' in document) {
-        document.startViewTransition(this.updateContent(contentUrl))
-      } else {
-        this.updateContent(contentUrl)
-      }
+    async viewTransition(contentUrl) {
+      if (!('startViewTransition' in document))
+        return await this.updateContent(contentUrl)
+
+      let transition = document.startViewTransition(async () => {
+        await this.updateContent(contentUrl)
+      })
+      await transition.finished
     }
 
     async updateContent(url) {
@@ -60,36 +58,27 @@
       // If content is cached, simulate an async behaviour.
       const cachedContent = contentMap.get(url)
       if (cachedContent) {
-        await new Promise(resolve => {
-          setTimeout(() => {
-            contentElement.innerHTML = cachedContent
-            resolve()
-          }, /* notice, no timeout here */)
-        })
-      } else {
-        // Content is not cached, try to fetch it.
-        try {
-          const response = await fetch(url)
-          const text = await response.text()
-          contentMap.set(url, text)
-          contentElement.innerHTML = text
-        } catch (error) {
-          console.error(error)
-          return
-        }
+        contentElement.innerHTML = cachedContent
+        return
       }
+      // Content is not cached, try to fetch it.
+      const response = await fetch(url)
+      const text = await response.text()
+      contentMap.set(url, text)
+      contentElement.innerHTML = text
       // Finally, update navlinks.
-      for (const navlink of navlinks.values()) navlink.setAriaCurrent()
+      for (const navlink of navlinks.values())
+        navlink.setAriaCurrent()
     }
   }
 
-  defineComponent("ghp-router", GHPRouter)
+  customElements.define("ghp-router", GHPRouter)
 
   function findParentRouter(initialElement) {
     let { parentElement: element } = initialElement
     while (element) {
       if (element.localName == "ghp-router") return element
-      element = element.parentElement;
+      element = element.parentElement
     }
     console.error(`No ghp-router found for element ${initialElement}`)
   }
@@ -125,7 +114,7 @@
     }
   }
 
-  defineComponent("ghp-route", GHPRoute)
+  customElements.define("ghp-route", GHPRoute)
 
   /**
    * Web component <ghp-link> handles an anchor that points to a route.
@@ -155,7 +144,7 @@
     }
   }
 
-  defineComponent("ghp-link", GHPLink)
+  customElements.define("ghp-link", GHPLink)
 
   /**
    * Web component <ghp-navlink> is similar to <ghp-link> but it also adds aria-selected="page" if the anchor points to current location.
@@ -186,8 +175,8 @@
     }
 
     setAriaCurrent() {
-      const { anchor } = this;
-      if (!anchor) return;
+      const { anchor } = this
+      if (!anchor) return
       if (anchor.href == document.location.toString()) {
         anchor.setAttribute("aria-current", "page")
       } else {
@@ -196,5 +185,5 @@
     }
   }
 
-  defineComponent("ghp-navlink", GHPNavlink)
-})();
+  customElements.define("ghp-navlink", GHPNavlink)
+})()
