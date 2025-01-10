@@ -1,5 +1,5 @@
 /*! fibo.github.io/github-pages-router • MIT License */
-(function GitHubPagesRouter() {
+(function GHPagesRouter() {
 
   /**
    * Web component <ghp-router>. All other ghp-* components must be inside a <ghp-router>.
@@ -177,11 +177,10 @@
     setAriaCurrent() {
       const { anchor } = this
       if (!anchor) return
-      if (anchor.href == document.location.toString()) {
+      if (anchor.href == document.location.toString())
         anchor.setAttribute("aria-current", "page")
-      } else {
-        anchor.setAttribute("aria-current", "")
-      }
+      else
+        anchor.removeAttribute("aria-current")
     }
   }
 
