@@ -34,6 +34,9 @@
      * Handle anchor click event.
      */
     navigate(event) {
+      // If it is Ctrl+click (or Cmd+click on Mac) it will open a new tab.
+      if (event.ctrlKey || event.metaKey) return
+      // Otherwise handle click with a viewTransition.
       event.preventDefault()
       const { href } = event.target
       if (href == document.location.toString()) return
@@ -138,9 +141,8 @@
     }
 
     handleEvent(event) {
-      if (event.type == "click" && event.target == this.anchor) {
-        this.router?.navigate(event)
-      }
+      if (event.type == "click" && event.target == this.anchor)
+        this.router.navigate(event)
     }
   }
 
@@ -169,9 +171,8 @@
     }
 
     handleEvent(event) {
-      if (event.type == "click" && event.target == this.anchor) {
-        this.router?.navigate(event)
-      }
+      if (event.type == "click" && event.target == this.anchor)
+        this.router.navigate(event)
     }
 
     setAriaCurrent() {
