@@ -20,18 +20,17 @@
   <h3>First kind</h3>
 
   <p>
-    The first kind happens when your repository has a name like
-    <code>YOUR-ACCOUNT-OR-ORGANIZATION.github.io</code>.
+  The first kind happens when you cratea a repository with a name like <code>NAME.github.io</code> where <code>NAME</code> is your GitHub username or your GitHub organization name.
   </p>
 
   <p>
     In this case the homepage will be
-    <code>https://YOUR-DOMAIN/</code>
+    <code>https://DOMAIN/</code>
     <br>
     where
-    <code>YOUR-DOMAIN</code>
-    will default to
-    <code>YOUR-ACCOUNT-OR-ORGANIZATION.github.io</code>.
+    <code>DOMAIN</code>
+    will default to the repository name
+    <code>NAME.github.io</code>.
   </p>
 
   <p>
@@ -42,8 +41,12 @@
   <h3>Second kind</h3>
 
   <p>
-    The second kind is a website that will have an homepage like
-    <code>https://YOUR-DOMAIN/YOUR-REPO-NAME/</code>.
+    The second kind is when you setup GitHub Pages to any repository;
+    the homepage will be like
+    <code>https://DOMAIN/REPO/</code>
+    where
+    <code>REPO</code>
+    is your repository name.
   </p>
 
   <p>
@@ -51,7 +54,7 @@
     something like the following:
   </p>
 
-  <pre><code>&lt;base href="/YOUR-REPO-NAME/" /&gt;</code></pre>
+  <pre><code>&lt;base href="/REPO/" /&gt;</code></pre>
 
   <p>
     To simulate this behaviour locally, the
