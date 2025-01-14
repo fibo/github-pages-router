@@ -22,3 +22,13 @@ Then launch
 npm run build
 ```
 
+## Documentation website
+
+The documentation website is deployed on GitHub Pages, using the `gh-pages` branch. So to publish it do something like
+
+```sh
+git switch gh-pages
+git rebase main
+git push
+```
+
