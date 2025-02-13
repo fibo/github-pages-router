@@ -15,5 +15,15 @@
   "author": {
     "name": "Gianluca Casati",
     "url": "http://fibo.github.io"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/fibo/github-pages-router.git"
+  },
+  "keywords": [
+    "github",
+    "pages",
+    "github-pages",
+    "router"
+  ]
 }
