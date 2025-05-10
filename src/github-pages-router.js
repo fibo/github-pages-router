@@ -2,7 +2,8 @@
 (function GHPagesRouter() {
 
   /**
-   * Web component <ghp-router>. All other ghp-* components must be inside a <ghp-router>.
+   * Web component <ghp-router>.
+   * All other ghp-* components must be inside a <ghp-router>.
    */
   class GHPRouter extends HTMLElement {
     /** DOM Element that wraps the content, defaults to <main> tag. */
@@ -58,7 +59,7 @@
 
     async updateContent(url) {
       const { contentElement, contentMap, navlinks } = this
-      // If content is cached, simulate an async behaviour.
+      // Check if the content is cached.
       const cachedContent = contentMap.get(url)
       if (cachedContent) {
         contentElement.innerHTML = cachedContent
@@ -94,6 +95,7 @@
    * - content: URL to HTML content file.
    *
    * @example
+   *
    * ```html
    * <ghp-route route="./" content="./path/to/file.html"></ghp-route>
    * ```
@@ -122,7 +124,9 @@
   /**
    * Web component <ghp-link> handles an anchor that points to a route.
    * It must wrap the anchor, and will override its click event.
+   *
    * @example
+   *
    * ```html
    * <ghp-link><a href="./some-route">Click me</a></ghp-link>
    * ```
@@ -149,7 +153,8 @@
   customElements.define("ghp-link", GHPLink)
 
   /**
-   * Web component <ghp-navlink> is similar to <ghp-link> but it also adds aria-selected="page" if the anchor points to current location.
+   * Web component <ghp-navlink> is similar to <ghp-link>
+   * but it adds aria-selected="page" if the anchor points to current location.
    */
   class GHPNavlink extends HTMLElement {
     router = undefined
