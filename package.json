@@ -1,14 +1,12 @@
 {
   "name": "github-pages-router",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "license": "MIT",
   "description": "A client side router for GitHub Pages, with View Transitions API",
   "type": "module",
   "homepage": "https://fibo.github.io/github-pages-router/",
   "bin": "./server.js",
-  "exports": {
-    "import": "./dist/github-pages-router.js"
-  },
+  "exports": "./dist/github-pages-router.js",
   "scripts": {
     "build": "esbuild --minify-whitespace --outdir=dist src/github-pages-router.js"
   },
